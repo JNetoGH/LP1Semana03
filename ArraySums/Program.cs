@@ -18,14 +18,7 @@ namespace ArraySums {
                 Console.Write($"insert value to position [{lineIndex}][{columnIndex}]: ");
                 matrix[lineIndex, columnIndex] = Convert.ToSingle(Console.ReadLine());
             };
-            
-            MatrixAction PrintMatrix = (matrix, lineIndex, columnIndex, lineSums, columnSums) => {
-                Console.Write($"[{matrix[lineIndex, columnIndex]}]");
-                bool hasFinishedLine = columnIndex == matrix.GetLength(1) - 1;
-                if (!hasFinishedLine) return;
-                Console.WriteLine(" ");
-            };
-            
+
             MatrixAction SumLinesAndColumns = (matrix, lineIndex, columnIndex, lineSums, columnSums) => {
                 Console.Write($"[{matrix[lineIndex, columnIndex]}]");
                 lineSums[lineIndex] += matrix[lineIndex, columnIndex];
@@ -43,7 +36,6 @@ namespace ArraySums {
             Console.WriteLine("\nMatrix (lines and columns sum)\n");
             RunOverMatrix(SumLinesAndColumns, floatMatrix);
             Console.WriteLine(" ");
-            RunOverMatrix(PrintMatrix, floatMatrix);
         }
 
         private static void RunOverMatrix(MatrixAction matrixAction, float[,] matrix) {
