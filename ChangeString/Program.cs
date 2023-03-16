@@ -15,9 +15,9 @@ namespace ChangeString {
             Console.WriteLine($"\nresult: {ChopOut(str, c)}");
         }
 
-        private static string ChopOut(string str, char c) {
+        private static string ChopOut(string str, char charToBeRemoved) {
             List<char> list = str.ToCharArray().ToList();
-            list.RemoveAll((removed) => removed == c);
+            list.RemoveAll((currentChar) => currentChar == charToBeRemoved);
             return new string(list.ToArray());
         }
         
