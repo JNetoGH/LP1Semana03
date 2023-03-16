@@ -1,17 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ChangeString {
     class Program {
         
         static void Main(string[] args) {
-            
-            Console.Write("insert a string: ");
+            Console.Write("\ninsert a string: ");
             string str = Console.ReadLine();
-            Console.WriteLine(str);
             
-            Console.Write("insert a char to be removed from the string: ");
+            Console.Write("\ninsert a char to be removed from the string: ");
             char c = Convert.ToChar(Console.ReadLine());
-            Console.WriteLine(c);
+            Console.WriteLine($"\nresult: {ChopOut(str, c)}");
+        }
+
+        private static string ChopOut(string str, char c) {
+            List<char> list = str.ToCharArray().ToList();
+            list.RemoveAll((removed) => removed == c);
+            return new string(list.ToArray());
         }
         
     }
