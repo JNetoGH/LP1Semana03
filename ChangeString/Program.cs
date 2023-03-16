@@ -11,6 +11,7 @@ namespace ChangeString {
             
             Console.Write("\ninsert a char to be removed from the string: ");
             char c = Convert.ToChar(Console.ReadLine());
+            
             Console.WriteLine($"\nresult: {ChopOut(str, c)}");
         }
 
