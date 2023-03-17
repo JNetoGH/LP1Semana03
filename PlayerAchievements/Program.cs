@@ -26,16 +26,17 @@ namespace PlayerAchievements {
             for (int i = 0; i < totalOfPlayers; i++) {
                 Console.WriteLine($"\nPlayer {i} Achievements Display");
                 Console.WriteLine(achievementsArray[i]);
-                if (HasAchievement(achievementsArray[i], Achievement.FinishGame) &&
-                    HasAchievement(achievementsArray[i], Achievement.DefeatOptionalBoss) &&
-                    HasAchievement(achievementsArray[i], Achievement.FindHiddenLevel)) {
+                if (HasAchievements(achievementsArray[i], Enum.GetValues(typeof(Achievement)) as Achievement[])) 
                     Console.WriteLine("Completionist!");
-                }
             } 
 
         }
 
-        private static bool HasAchievement(Achievement collection, Achievement check) => (collection & check) == check;
+        private static bool HasAchievements(Achievement collection, Achievement[] checks) {
+            foreach (Achievement check in checks) 
+                if ((collection & check) != check) return false;
+            return true;
+        }
         
         private static string WriteAndRead(string str) {
             Console.Write(str);
