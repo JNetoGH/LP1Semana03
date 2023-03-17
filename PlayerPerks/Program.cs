@@ -27,7 +27,7 @@ namespace PlayerPerks {
         
         private Perks _ownedPerks;
         
-        private readonly Dictionary<char, Perks> _possiblePerks = new Dictionary<char, Perks>() {
+        public readonly Dictionary<char, Perks> _possiblePerks = new Dictionary<char, Perks>() {
             { 'a', Perks.AutoHeal}, { 'w', Perks.WaterBreathing },
             { 's', Perks.Stealth }, { 'd', Perks.DoubleJump }
         };
@@ -53,7 +53,7 @@ namespace PlayerPerks {
         public override string ToString() {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine($"perks: {_ownedPerks}");
-            if (((_ownedPerks & Perks.Stealth) == Perks.Stealth) && ((_ownedPerks & Perks.DoubleJump) == Perks.DoubleJump))
+            if ((_ownedPerks & Perks.Stealth) == Perks.Stealth && (_ownedPerks & Perks.DoubleJump) == Perks.DoubleJump)
                 stringBuilder.AppendLine("Silent jumper!");
             if (!((_ownedPerks & Perks.AutoHeal) == Perks.AutoHeal))
                 stringBuilder.AppendLine("Not gonna make it!");
@@ -67,6 +67,10 @@ namespace PlayerPerks {
             Player? p = null;
 
             try {
+                if (args.Length == 0) {
+                    p = new Player("");
+                    return;
+                }
                 p = new Player(args[0]);
             }
             catch (PerkKeyNotFoundException e) {
@@ -77,7 +81,7 @@ namespace PlayerPerks {
                 Console.WriteLine(e.Message);
                 return;
             }
-
+        
             Console.WriteLine(p);
         }
     }
