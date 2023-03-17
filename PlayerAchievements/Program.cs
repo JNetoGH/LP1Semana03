@@ -10,6 +10,7 @@ namespace PlayerAchievements {
     }
     
     class Program {
+        
         static void Main(string[] args) {
             
             int totalOfPlayers = int.Parse(WriteAndRead("\nInsert the total of players: "));
@@ -21,7 +22,7 @@ namespace PlayerAchievements {
                     if (WriteAndRead($"Add {availableAchievement} (Y/N): ").ToUpper().Equals("Y")) 
                         achievementsArray[i] |= availableAchievement;
             }
-
+            
             Console.WriteLine();
             for (int i = 0; i < totalOfPlayers; i++) {
                 Console.WriteLine($"\nPlayer {i} Achievements Display \n{achievementsArray[i]}");
