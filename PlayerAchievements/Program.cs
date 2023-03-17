@@ -24,8 +24,7 @@ namespace PlayerAchievements {
 
             Console.WriteLine();
             for (int i = 0; i < totalOfPlayers; i++) {
-                Console.WriteLine($"\nPlayer {i} Achievements Display");
-                Console.WriteLine(achievementsArray[i]);
+                Console.WriteLine($"\nPlayer {i} Achievements Display \n{achievementsArray[i]}");
                 if (HasAchievements(achievementsArray[i], Enum.GetValues(typeof(Achievement)) as Achievement[])) 
                     Console.WriteLine("Completionist!");
             } 
