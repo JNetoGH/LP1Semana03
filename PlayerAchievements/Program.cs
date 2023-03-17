@@ -12,7 +12,7 @@ namespace PlayerAchievements {
     class Program {
         static void Main(string[] args) {
             
-            int totalOfPlayers = int.Parse(WriteAndRead("Insert the total of players: "));
+            int totalOfPlayers = int.Parse(WriteAndRead("\nInsert the total of players: "));
             Achievement[] achievementsArray = new Achievement[totalOfPlayers];
     
             for (int i = 0; i < totalOfPlayers; i++) {
