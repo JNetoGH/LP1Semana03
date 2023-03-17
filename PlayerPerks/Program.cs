@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace PlayerPerks {
 
@@ -24,7 +25,7 @@ namespace PlayerPerks {
     
     public class Player {
         
-        public Perks OwnedPerks;
+        private Perks _ownedPerks;
         
         private readonly Dictionary<char, Perks> _possiblePerks = new Dictionary<char, Perks>() {
             { 'a', Perks.AutoHeal}, { 'w', Perks.WaterBreathing },
@@ -46,10 +47,18 @@ namespace PlayerPerks {
         
         public void AddPerkFromKey(char key) {
             if (!_possiblePerks.ContainsKey(key)) throw new PerkKeyNotFoundException();
-            OwnedPerks |= _possiblePerks[key];
+            _ownedPerks |= _possiblePerks[key];
         }
         
-        public override string ToString() => $"perks: {OwnedPerks}";
+        public override string ToString() {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"perks: {_ownedPerks}");
+            if (((_ownedPerks & Perks.Stealth) == Perks.Stealth) && ((_ownedPerks & Perks.DoubleJump) == Perks.DoubleJump))
+                stringBuilder.AppendLine("Silent jumper!");
+            if (!((_ownedPerks & Perks.AutoHeal) == Perks.AutoHeal))
+                stringBuilder.AppendLine("Not gonna make it!");
+            return stringBuilder.ToString();
+        }
     }
     
     public class Program {
@@ -58,7 +67,7 @@ namespace PlayerPerks {
             Player? p = null;
 
             try {
-                p = new Player("w");
+                p = new Player(args[0]);
             }
             catch (PerkKeyNotFoundException e) {
                 Console.WriteLine(e.Message);
