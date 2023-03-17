@@ -11,44 +11,35 @@ namespace PlayerAchievements {
     
     class Program {
         static void Main(string[] args) {
-            Console.Write("Insert the total of players: ");
-            int totalOfPlayers = int.Parse(Console.ReadLine());
-
+            
+            int totalOfPlayers = int.Parse(WriteAndRead("Insert the total of players: "));
             Achievement[] achievementsArray = new Achievement[totalOfPlayers];
-
+    
             for (int i = 0; i < totalOfPlayers; i++) {
                 Console.WriteLine($"\nPlayer {i} Achievements Setup");
-                
-                Console.Write("Add Defeat Optional Boss (Y/N): ");
-                if (Console.ReadLine().ToUpper().Equals("Y"))
-                    achievementsArray[i] |= Achievement.DefeatOptionalBoss;
-                
-                Console.Write("Add Find Hidden Level (Y/N): ");
-                if (Console.ReadLine().ToUpper().Equals("Y"))
-                    achievementsArray[i] |= Achievement.FindHiddenLevel;
-                
-                Console.Write("Add Finish Game (Y/N): ");
-                if (Console.ReadLine().ToUpper().Equals("Y"))
-                    achievementsArray[i] |= Achievement.FinishGame;
+                foreach (Achievement availableAchievement in Enum.GetValues(typeof(Achievement))) 
+                    if (WriteAndRead($"Add {availableAchievement} (Y/N): ").ToUpper().Equals("Y")) 
+                        achievementsArray[i] |= availableAchievement;
             }
 
             Console.WriteLine();
-            
             for (int i = 0; i < totalOfPlayers; i++) {
                 Console.WriteLine($"\nPlayer {i} Achievements Display");
                 Console.WriteLine(achievementsArray[i]);
                 if (HasAchievement(achievementsArray[i], Achievement.FinishGame) &&
                     HasAchievement(achievementsArray[i], Achievement.DefeatOptionalBoss) &&
-                    HasAchievement(achievementsArray[i], Achievement.FindHiddenLevel)) 
-                {
+                    HasAchievement(achievementsArray[i], Achievement.FindHiddenLevel)) {
                     Console.WriteLine("Completionist!");
                 }
             } 
 
         }
 
-        private static bool HasAchievement(Achievement collection, Achievement check) {
-            return (collection & check) == check;
+        private static bool HasAchievement(Achievement collection, Achievement check) => (collection & check) == check;
+        
+        private static string WriteAndRead(string str) {
+            Console.Write(str);
+            return Console.ReadLine();
         }
         
     }
