@@ -33,7 +33,8 @@ namespace PlayerAchievements {
 
         private static bool HasAchievements(Achievement collection, Achievement[] checks) {
             foreach (Achievement check in checks) 
-                if ((collection & check) != check) return false;
+                if ((collection & check) != check) 
+                    return false;
             return true;
         }
         
